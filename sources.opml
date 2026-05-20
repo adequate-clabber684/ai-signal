@@ -2,7 +2,7 @@
 <opml version="2.0">
   <head>
     <title>AI Signal — Curated AI sources</title>
-    <dateCreated>Wed, 20 May 2026 09:32:32 +0000</dateCreated>
+    <dateCreated>Wed, 20 May 2026 09:39:37 +0000</dateCreated>
     <ownerName>AI Signal</ownerName>
     <ownerEmail>contribute via GitHub PR</ownerEmail>
     <docs>https://github.com/amikumar91/ai-signal</docs>
@@ -18,6 +18,7 @@
       <outline type="rss" text="AI2 Blog (Allen Institute)" title="AI2 Blog (Allen Institute)" xmlUrl="https://allenai.org/blog/rss" htmlUrl="https://allenai.org/blog" description="[deep] [researcher, ml-engineer] open-source, reasoning, science, olmo" />
     </outline>
     <outline text="Individuals" title="Individuals">
+      <outline type="rss" text="Gwern Branwen" title="Gwern Branwen" xmlUrl="https://gwern.substack.com/feed" htmlUrl="https://gwern.net" description="[deep] [researcher, curious] ai-scaling, forecasting, statistics, long-form, neural-scaling-laws" />
       <outline type="rss" text="Lilian Weng" title="Lilian Weng" xmlUrl="https://lilianweng.github.io/index.xml" htmlUrl="https://lilianweng.github.io" description="[deep] [researcher, ml-engineer] transformers, rl, diffusion, survey, agents" />
       <outline type="rss" text="Andrej Karpathy" title="Andrej Karpathy" xmlUrl="https://karpathy.github.io/feed.xml" htmlUrl="https://karpathy.ai" description="[deep] [researcher, ml-engineer, builder] llm-fundamentals, neural-networks, video, education" />
       <outline type="rss" text="Sebastian Raschka" title="Sebastian Raschka" xmlUrl="https://magazine.sebastianraschka.com/feed" htmlUrl="https://magazine.sebastianraschka.com" description="[deep] [researcher, ml-engineer] llm-training, fine-tuning, papers, weekly-review" />

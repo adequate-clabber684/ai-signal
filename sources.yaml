@@ -97,6 +97,20 @@ sources:
 
   # ── Individuals ───────────────────────────────────────────────────────────
 
+  - name: "Gwern Branwen"
+    url: https://gwern.net
+    rss: https://gwern.substack.com/feed
+    type: individual
+    depth: deep
+    audience: [researcher, curious]
+    tags: [ai-scaling, forecasting, statistics, long-form, neural-scaling-laws]
+    activity: slow
+    last_checked: 2026-05
+    landmark_posts:
+      - title: "The Scaling Hypothesis"
+        url: https://gwern.net/scaling-hypothesis
+        why: "One of the earliest rigorous arguments that scaling alone would produce qualitative AI leaps — written before the evidence was conclusive"
+
   - name: "Lilian Weng"
     url: https://lilianweng.github.io
     rss: https://lilianweng.github.io/index.xml
