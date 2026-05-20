@@ -8,11 +8,27 @@ Ask yourself: **would a serious practitioner find this source valuable 6 months 
 
 If yes, add it. If you're unsure, open an issue first.
 
+---
+
+## The one rule
+
+**After any edit to `sources.yaml`, regenerate the OPML before committing:**
+
+```bash
+python generate_opml.py
+git add sources.yaml sources.opml
+git commit -m "your message"
+```
+
+Never commit `sources.yaml` without regenerating `sources.opml`. They must stay in sync.
+
+---
+
 ## Adding a new source
 
 1. Fork the repo and edit `sources.yaml`
 2. Add your source following the schema below
-3. Run `python generate_opml.py` to regenerate `sources.opml`
+3. `python generate_opml.py`
 4. Open a PR with a brief note on why this source deserves inclusion
 
 ### Required fields
@@ -26,7 +42,7 @@ If yes, add it. If you're unsure, open an issue first.
   audience: [ml-engineer, builder]    # see audiences below
   tags: [inference, production]       # 3–6 lowercase tags
   activity: active                    # active | slow | archived
-  last_checked: 2025-05               # YYYY-MM of when you verified this
+  last_checked: 2026-05               # YYYY-MM of when you verified this
 ```
 
 ### Optional but valued
@@ -39,6 +55,8 @@ If yes, add it. If you're unsure, open an issue first.
 ```
 
 Landmark posts are what make this different from every other list. A good `why` is specific: not "great post about transformers" but "the clearest explanation of why attention is O(n²) and what alternatives exist."
+
+---
 
 ## Source types
 
@@ -56,7 +74,7 @@ Landmark posts are what make this different from every other list. A good `why` 
 | Audience | Means |
 |----------|-------|
 | `researcher` | PhD-level ML background expected |
-| `ml-engineer` | Strong engineering + some ML background |
+| `ml-engineer` | Strong engineering + solid ML fundamentals |
 | `builder` | Software engineer building AI products |
 | `curious` | Technical but not ML-specialist |
 
@@ -64,67 +82,88 @@ Use multiple audiences when genuinely appropriate. Don't inflate — if a source
 
 ## Depth guide
 
-**`deep`** — assumes significant ML background. Expects the reader to follow mathematical notation, know what KL divergence is, understand attention mechanisms. Posts require focused reading time.
+**`deep`** — assumes significant ML background. Follows mathematical notation, knows KL divergence, understands attention mechanisms. Posts require focused reading time.
 
-**`medium`** — assumes software engineering competence. May introduce ML concepts but doesn't drown in them. Most working ML engineers can follow without a textbook.
+**`medium`** — assumes software engineering competence. Introduces ML concepts without drowning in them. Most working ML engineers can follow without a textbook.
 
 **`shallow`** — good for orientation. Summaries, digests, news. Valuable for staying aware without deep engagement.
 
-## What we won't add
-
-- **Hype/marketing content** — company blog posts that are primarily product announcements
-- **Tutorial farms** — sites that exist to rank on Google, not to share genuine knowledge
-- **Dead sources** — if the last post was more than 18 months ago and there are no landmark posts
-- **Paywalled content** — readers should be able to access it
-- **Sources without a clear point of view** — generic aggregators that add no editorial judgement
+---
 
 ## Updating activity status
 
-If you notice a source has gone quiet:
+| Status | Threshold |
+|--------|-----------|
+| `active` | Posts at least once every ~6 weeks |
+| `slow` | Less than monthly, but posted in the last 18 months |
+| `archived` | No posts in 18+ months — keep only if landmark posts exist |
 
-1. Check the RSS feed directly — sometimes the blog is active but the main site looks stale
-2. If no posts in 90+ days, change `activity: active` → `activity: slow`
-3. If no posts in 18+ months, change to `activity: archived`
-4. Open a PR with the change
+To update:
+1. Check the source URL — sometimes the blog is active but the main site looks stale
+2. Edit `activity:` and update `last_checked:` to today's YYYY-MM
+3. `python generate_opml.py`, commit, open a PR
 
-The staleness bot will flag these automatically every Monday, but human verification is better.
+Activity update PRs can batch multiple sources in one commit.
+
+---
+
+## What we won't add
+
+- **Paywalled content** — readers must be able to access it freely
+- **Tutorial farms** — sites that exist to rank on Google, not share genuine knowledge
+- **Primarily marketing content** — blogs that are mostly product announcements
+- **Podcast-only sources** — no written content, or transcripts only
+- **Sources without a clear point of view** — generic aggregators with no editorial judgement
+- **Dead sources** — no posts in 18+ months, unless landmark posts justify keeping it archived
+
+---
 
 ## Removing a source
 
 We remove sources if:
 - They've been `archived` for 6+ months with no landmark posts
-- The domain has changed hands and the content is no longer relevant
-- The quality has significantly degraded
+- The domain has changed hands and content is no longer relevant
+- Quality has significantly degraded
 
-Open an issue before removing — sometimes someone has context on why a source is temporarily quiet.
+Open an issue before removing — sometimes someone has context on a temporarily quiet source.
+
+---
 
 ## PR etiquette
 
 - One PR per source addition (keeps review clean)
 - Activity update PRs can batch multiple sources
-- Include the `last_checked` date as today's YYYY-MM
-- Regenerate `sources.opml` before submitting (`python generate_opml.py`)
+- Always include an updated `last_checked` date
+- Always regenerate `sources.opml` before submitting
 
-## Using the curation agent
+---
 
-Two Claude Code slash commands handle discovery and activity checking. Both edit
-`sources.yaml` directly — you review with `git diff`, then commit.
+## Optional: AI-assisted curation
+
+If you have Claude Code (Claude Pro), two slash commands can automate a curation pass. They edit `sources.yaml` directly using web search — no manual checking required.
+
+This is entirely optional. The manual workflow above is the primary path.
 
 ```bash
-# Open Claude Code in this directory, then:
-/scan-sources    # check all sources for activity changes
+# Open Claude Code in this directory, then run:
+/scan-sources    # checks all sources for activity changes
 /curate          # full pass: activity + landmark posts + new source discovery
-
-# After the command finishes:
-git diff sources.yaml
-python generate_opml.py
-git add sources.yaml sources.opml && git commit -m "curate: YYYY-MM-DD"
 ```
 
-See `SETUP.md §4` for the full workflow including how to queue candidate URLs.
+After the command finishes, the agent prints a summary. Then:
 
-When submitting a PR for sources found via `/curate`, note that in your PR
-description — it helps reviewers understand the provenance.
+```bash
+git diff sources.yaml              # read what changed
+# edit sources.yaml if you want to adjust or remove anything
+python generate_opml.py            # regenerate if you made any edits
+git add sources.yaml sources.opml
+git commit -m "curate: YYYY-MM-DD"
+git push
+```
+
+When submitting a PR for sources found via `/curate`, note that in your PR description — it helps reviewers understand the provenance.
+
+---
 
 ## License
 

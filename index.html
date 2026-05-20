@@ -605,203 +605,238 @@
 </footer>
 
 <script>
-// ── Data (generated from sources.yaml) ─────────────────────────────────────
+// ── Data (generated from sources.yaml) ──────────────────────────────────────
 const SOURCES = [
   {
     name: "Anthropic Research", url: "https://www.anthropic.com/research",
     rss: "https://www.anthropic.com/rss.xml", type: "lab", depth: "deep",
     audience: ["researcher","ml-engineer"], tags: ["safety","alignment","interpretability","Claude","RLHF"],
     activity: "active", last_checked: "2026-05",
-    landmarks: [{ title:"Scaling Monosemanticity", url:"https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html", why:"Landmark work on finding interpretable features inside large models using sparse autoencoders" }]
+    landmarks: [{title:"Scaling Monosemanticity", url:"https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html", why:"Landmark work on finding interpretable features inside large models using sparse autoencoders"}]
   },
   {
     name: "OpenAI Research", url: "https://openai.com/research",
     rss: "https://openai.com/blog/rss/", type: "lab", depth: "deep",
     audience: ["researcher","ml-engineer"], tags: ["gpt","rlhf","safety","alignment","reasoning"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "DeepMind Blog", url: "https://deepmind.google/discover/blog/",
     rss: "https://deepmind.google/blog/rss.xml", type: "lab", depth: "deep",
     audience: ["researcher","ml-engineer"], tags: ["gemini","alphafold","rl","reasoning","science"],
     activity: "active", last_checked: "2026-05",
-    landmarks: [{ title:"AlphaFold 3", url:"https://blog.google/technology/ai/google-deepmind-isomorphic-alphafold-3-ai-model/", why:"Extends protein structure prediction to all molecules — massive leap for biology" }]
+    landmarks: [{title:"AlphaFold 3", url:"https://blog.google/technology/ai/google-deepmind-isomorphic-alphafold-3-ai-model/", why:"Extends protein structure prediction to all molecules — massive leap for biology"}]
   },
   {
     name: "Meta AI Research", url: "https://ai.meta.com/research/",
     rss: "https://ai.meta.com/blog/rss/", type: "lab", depth: "deep",
     audience: ["researcher","ml-engineer"], tags: ["llama","open-source","vision","audio","multimodal"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "Mistral AI Blog", url: "https://mistral.ai/news/",
     rss: "https://mistral.ai/rss", type: "lab", depth: "medium",
     audience: ["ml-engineer","builder"], tags: ["open-source","efficiency","european-ai","mixtral"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "Cohere for AI", url: "https://cohere.com/research",
     rss: "https://txt.cohere.com/rss/", type: "lab", depth: "deep",
     audience: ["researcher","ml-engineer"], tags: ["rag","embeddings","enterprise","multilingual"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "AI2 Blog (Allen Institute)", url: "https://allenai.org/blog",
     rss: "https://allenai.org/blog/rss", type: "lab", depth: "deep",
     audience: ["researcher","ml-engineer"], tags: ["open-source","reasoning","science","olmo"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Gwern Branwen", url: "https://gwern.net",
+    rss: "https://gwern.substack.com/feed", type: "individual", depth: "deep",
+    audience: ["researcher","curious"], tags: ["ai-scaling","forecasting","statistics","long-form","neural-scaling-laws"],
+    activity: "slow", last_checked: "2026-05",
+    landmarks: [{title:"The Scaling Hypothesis", url:"https://gwern.net/scaling-hypothesis", why:"One of the earliest rigorous arguments that scaling alone would produce qualitative AI leaps — written before the evidence was conclusive"}]
   },
   {
     name: "Lilian Weng", url: "https://lilianweng.github.io",
     rss: "https://lilianweng.github.io/index.xml", type: "individual", depth: "deep",
     audience: ["researcher","ml-engineer"], tags: ["transformers","rl","diffusion","survey","agents"],
     activity: "slow", last_checked: "2026-05",
-    landmarks: [
-      { title:"Extrinsic Hallucinations in LLMs", url:"https://lilianweng.github.io/posts/2024-07-07-hallucination/", why:"Best taxonomy of hallucination types — required reading before building any production LLM system" },
-      { title:"LLM Powered Autonomous Agents", url:"https://lilianweng.github.io/posts/2023-06-23-agent/", why:"Still the canonical reference on agent architecture components" }
-    ]
+    landmarks: [{title:"Extrinsic Hallucinations in LLMs", url:"https://lilianweng.github.io/posts/2024-07-07-hallucination/", why:"Best taxonomy of hallucination types — required reading before building any production LLM system"}, {title:"LLM Powered Autonomous Agents", url:"https://lilianweng.github.io/posts/2023-06-23-agent/", why:"Still the canonical reference on agent architecture components"}]
   },
   {
     name: "Andrej Karpathy", url: "https://karpathy.ai",
     rss: "https://karpathy.github.io/feed.xml", type: "individual", depth: "deep",
     audience: ["researcher","ml-engineer","builder"], tags: ["llm-fundamentals","neural-networks","video","education"],
-    activity: "slow", last_checked: "2026-05",
-    landmarks: [{ title:"The Unreasonable Effectiveness of RNNs", url:"http://karpathy.github.io/2015/05/21/rnn-effectiveness/", why:"Still the best intuitive intro to sequence models — the writing style alone is worth studying" }]
+    activity: "active", last_checked: "2026-05",
+    landmarks: [{title:"The Unreasonable Effectiveness of Recurrent Neural Networks", url:"http://karpathy.github.io/2015/05/21/rnn-effectiveness/", why:"Still the best intuitive intro to sequence models — the writing style alone is worth studying"}]
   },
   {
     name: "Sebastian Raschka", url: "https://magazine.sebastianraschka.com",
     rss: "https://magazine.sebastianraschka.com/feed", type: "individual", depth: "deep",
     audience: ["researcher","ml-engineer"], tags: ["llm-training","fine-tuning","papers","weekly-review"],
     activity: "active", last_checked: "2026-05",
-    landmarks: [{ title:"Understanding and Coding Self-Attention", url:"https://magazine.sebastianraschka.com/p/understanding-and-coding-self-attention", why:"Ground-up attention implementation — better than most textbooks" }]
+    landmarks: [{title:"Understanding and Coding Self-Attention", url:"https://magazine.sebastianraschka.com/p/understanding-and-coding-self-attention", why:"Ground-up attention implementation — better than most textbooks"}]
   },
   {
     name: "Eugene Yan", url: "https://eugeneyan.com",
     rss: "https://eugeneyan.com/rss.xml", type: "individual", depth: "medium",
     audience: ["ml-engineer","builder"], tags: ["applied-ml","rag","recsys","evaluation","production"],
     activity: "active", last_checked: "2026-05",
-    landmarks: [{ title:"Patterns for Building LLM-based Systems", url:"https://eugeneyan.com/writing/llm-patterns/", why:"The pragmatic builder's guide — covers evals, RAG, caching, and more in one place" }]
+    landmarks: [{title:"Patterns for Building LLM-based Systems & Products", url:"https://eugeneyan.com/writing/llm-patterns/", why:"The pragmatic builder's guide — covers evals, RAG, caching, and more in one place"}]
   },
   {
     name: "Jay Alammar", url: "https://jalammar.github.io",
     rss: "https://jalammar.github.io/feed.xml", type: "individual", depth: "deep",
     audience: ["researcher","ml-engineer","curious"], tags: ["transformers","visualization","intuition","education"],
     activity: "slow", last_checked: "2026-05",
-    landmarks: [{ title:"The Illustrated Transformer", url:"https://jalammar.github.io/illustrated-transformer/", why:"The visual that made transformers click for a generation of practitioners" }]
+    landmarks: [{title:"The Illustrated Transformer", url:"https://jalammar.github.io/illustrated-transformer/", why:"The visual that made transformers click for a generation of practitioners"}]
   },
   {
     name: "Simon Willison", url: "https://simonwillison.net",
     rss: "https://simonwillison.net/atom/everything/", type: "individual", depth: "medium",
     audience: ["builder","curious"], tags: ["llm-tools","prompt-engineering","tooling","practical"],
     activity: "active", last_checked: "2026-05",
-    landmarks: [{ title:"Everything I know about LLMs", url:"https://simonwillison.net/2023/Aug/3/weird-world-of-llms/", why:"Best on-ramp for developers who are new to the LLM space" }]
+    landmarks: [{title:"Everything I know about LLMs", url:"https://simonwillison.net/2023/Aug/3/weird-world-of-llms/", why:"Best on-ramp for developers who are new to the LLM space"}]
   },
   {
     name: "Hamel Husain", url: "https://hamel.dev",
     rss: "https://hamel.dev/feed.xml", type: "individual", depth: "deep",
     audience: ["ml-engineer","builder"], tags: ["evals","fine-tuning","practical","production"],
     activity: "active", last_checked: "2026-05",
-    landmarks: [{ title:"Your AI Product Needs Evals", url:"https://hamel.dev/blog/posts/evals/", why:"The most direct argument for why evals are non-negotiable — with a practical framework" }]
+    landmarks: [{title:"Your AI Product Needs Evals", url:"https://hamel.dev/blog/posts/evals/", why:"The most direct argument for why evals are non-negotiable — with a practical framework"}, {title:"LLM Evals: Everything You Need to Know", url:"https://hamel.dev/blog/posts/evals-faq/", why:"Comprehensive FAQ distilled from teaching 700+ engineers — covers evaluation frameworks, common pitfalls, and the full lifecycle of building LLM evals in production"}]
   },
   {
     name: "Chip Huyen", url: "https://huyenchip.com",
     rss: "https://huyenchip.com/feed.xml", type: "individual", depth: "deep",
     audience: ["ml-engineer","builder"], tags: ["mlops","production","inference","real-time-ml"],
     activity: "slow", last_checked: "2026-05",
-    landmarks: [{ title:"Building LLM applications for production", url:"https://huyenchip.com/2023/04/11/llm-engineering.html", why:"Grounded reality check on the gap between demos and production systems" }]
+    landmarks: [{title:"Building LLM applications for production", url:"https://huyenchip.com/2023/04/11/llm-engineering.html", why:"Grounded reality check on the gap between demos and production systems"}]
   },
   {
     name: "vLLM Blog", url: "https://blog.vllm.ai",
     rss: "https://blog.vllm.ai/feed.xml", type: "systems", depth: "deep",
     audience: ["ml-engineer"], tags: ["inference","serving","kv-cache","throughput","gpu"],
     activity: "active", last_checked: "2026-05",
-    landmarks: [{ title:"PagedAttention", url:"https://blog.vllm.ai/2023/06/20/vllm.html", why:"Introduced paged KV cache management — reshaped how the field thinks about LLM memory" }]
+    landmarks: [{title:"PagedAttention", url:"https://blog.vllm.ai/2023/06/20/vllm.html", why:"Introduced paged KV cache management — reshaped how the field thinks about LLM memory"}]
   },
   {
     name: "Modal Blog", url: "https://modal.com/blog",
     rss: "https://modal.com/blog/rss.xml", type: "systems", depth: "medium",
     audience: ["ml-engineer","builder"], tags: ["inference","serverless","gpu","deployment"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "Together AI Blog", url: "https://www.together.ai/blog",
     rss: "https://www.together.ai/blog/rss.xml", type: "systems", depth: "deep",
     audience: ["ml-engineer"], tags: ["inference","fine-tuning","speculative-decoding","open-source"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "Anyscale Blog", url: "https://www.anyscale.com/blog",
     rss: "https://www.anyscale.com/blog/rss.xml", type: "systems", depth: "medium",
     audience: ["ml-engineer","builder"], tags: ["ray","distributed","inference","serving"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "The Gradient", url: "https://thegradient.pub",
     rss: "https://thegradient.pub/rss/", type: "paper-explainer", depth: "deep",
     audience: ["researcher","ml-engineer"], tags: ["research-commentary","interviews","trends"],
-    activity: "slow", last_checked: "2026-05", landmarks: []
+    activity: "slow", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "The Batch (deeplearning.ai)", url: "https://www.deeplearning.ai/the-batch/",
     rss: "https://www.deeplearning.ai/the-batch/feed/", type: "paper-explainer", depth: "medium",
     audience: ["ml-engineer","curious"], tags: ["weekly-digest","research-summary","andrew-ng"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "Interconnects (Nathan Lambert)", url: "https://www.interconnects.ai",
     rss: "https://www.interconnects.ai/feed", type: "paper-explainer", depth: "deep",
     audience: ["researcher","ml-engineer"], tags: ["rlhf","alignment","policy","open-research"],
     activity: "active", last_checked: "2026-05",
-    landmarks: [{ title:"RLHF Book", url:"https://rlhfbook.com", why:"The most complete open reference on RLHF — written by someone who does it at scale" }]
+    landmarks: [{title:"RLHF Book", url:"https://rlhfbook.com", why:"The most complete open reference on RLHF — written by someone who does it at scale"}]
   },
   {
     name: "Transformer Circuits Thread", url: "https://transformer-circuits.pub",
     rss: "https://transformer-circuits.pub/rss.xml", type: "paper-explainer", depth: "deep",
     audience: ["researcher"], tags: ["interpretability","mechanistic","circuits","superposition"],
     activity: "slow", last_checked: "2026-05",
-    landmarks: [{ title:"In-context Learning and Induction Heads", url:"https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html", why:"Foundational mechanistic interpretability — explains a concrete, verifiable circuit" }]
+    landmarks: [{title:"In-context Learning and Induction Heads", url:"https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html", why:"Foundational mechanistic interpretability — explains a concrete, verifiable circuit"}]
   },
   {
     name: "Hugging Face Blog", url: "https://huggingface.co/blog",
     rss: "https://huggingface.co/blog/feed.xml", type: "applied", depth: "medium",
     audience: ["ml-engineer","builder"], tags: ["open-source","fine-tuning","datasets","transformers-lib"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
-    name: "Weights & Biases Blog", url: "https://wandb.ai/fully-connected",
+    name: "Weights & Biases (W&B) Blog", url: "https://wandb.ai/fully-connected",
     rss: "https://wandb.ai/fully-connected/rss.xml", type: "applied", depth: "medium",
     audience: ["ml-engineer"], tags: ["experiment-tracking","mlops","evals","fine-tuning"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "LangChain Blog", url: "https://blog.langchain.dev",
     rss: "https://blog.langchain.dev/rss/", type: "applied", depth: "medium",
     audience: ["builder"], tags: ["agents","rag","tooling","orchestration"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "Braintrust Blog", url: "https://www.braintrust.dev/blog",
     rss: "https://www.braintrust.dev/blog/rss.xml", type: "applied", depth: "medium",
     audience: ["builder","ml-engineer"], tags: ["evals","production","benchmarking"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "Honeycomb Blog", url: "https://www.honeycomb.io/blog",
     rss: "https://www.honeycomb.io/blog/rss.xml", type: "applied", depth: "medium",
     audience: ["builder","ml-engineer"], tags: ["observability","production","llm-in-prod"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "Import AI (Jack Clark)", url: "https://importai.substack.com",
     rss: "https://importai.substack.com/feed", type: "news", depth: "medium",
     audience: ["researcher","curious"], tags: ["weekly","policy","research-digest","geopolitics"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
   },
   {
     name: "Last Week in AI", url: "https://lastweekin.ai",
     rss: "https://lastweekin.ai/feed", type: "news", depth: "shallow",
     audience: ["curious","builder"], tags: ["weekly-digest","news","broad-coverage"],
-    activity: "active", last_checked: "2026-05", landmarks: []
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Latent Space", url: "https://www.latent.space",
+    rss: "https://www.latent.space/feed", type: "paper-explainer", depth: "medium",
+    audience: ["ml-engineer","builder"], tags: ["ai-engineering","papers","agents","tooling","weekly"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Vicki Boykis", url: "https://vickiboykis.com",
+    rss: "https://vickiboykis.com/index.xml", type: "individual", depth: "medium",
+    audience: ["ml-engineer"], tags: ["embeddings","recsys","ml-infrastructure","engineering"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: [{title:"What Are Embeddings", url:"https://vickiboykis.com/what_are_embeddings/", why:"The clearest explanation of what embeddings actually are and how they work — widely cited as the reference introduction for ML engineers"}]
   },
 ];
 

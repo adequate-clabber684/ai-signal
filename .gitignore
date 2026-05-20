@@ -6,3 +6,6 @@ CURATION_REPORT.md
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# Claude Code / Superpowers internal
+docs/superpowers/

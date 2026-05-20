@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-generate_opml.py — generates sources.opml from sources.yaml
+generate_opml.py — generates sources.opml and updates index.html from sources.yaml
 
 Usage:
     python generate_opml.py
-    python generate_opml.py --output custom.opml
 
-Output is a valid OPML 2.0 file importable into Feedly, NetNewsWire,
-Reeder, Inoreader, and any other RSS reader that supports OPML.
+Outputs:
+    sources.opml   — importable into Feedly, Reeder, NetNewsWire, Inoreader
+    index.html     — SOURCES block rewritten to match sources.yaml
 """
 
-import argparse
+import json
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -33,12 +33,18 @@ TYPE_LABELS = {
 
 TYPE_ORDER = ["lab", "individual", "systems", "paper-explainer", "applied", "news"]
 
+# Sentinels that delimit the auto-generated block inside index.html
+INDEX_START = "// ── Data (generated from sources.yaml)"
+INDEX_END   = "// ── Config"
+
 
 def load_sources(path: Path) -> list[dict]:
-    with path.open() as f:
+    with path.open(encoding="utf-8") as f:
         data = yaml.safe_load(f)
     return data["sources"]
 
+
+# ── OPML ─────────────────────────────────────────────────────────────────────
 
 def build_opml(sources: list[dict]) -> Element:
     root = Element("opml", version="2.0")
@@ -54,7 +60,6 @@ def build_opml(sources: list[dict]) -> Element:
 
     body = SubElement(root, "body")
 
-    # Group by type, in defined order
     by_type: dict[str, list[dict]] = {t: [] for t in TYPE_ORDER}
     for source in sources:
         t = source.get("type", "applied")
@@ -72,7 +77,7 @@ def build_opml(sources: list[dict]) -> Element:
         for s in group:
             rss = s.get("rss")
             if not rss:
-                continue  # skip sources without RSS
+                continue
 
             tags = ", ".join(s.get("tags", []))
             audience = ", ".join(s.get("audience", []))
@@ -92,42 +97,112 @@ def build_opml(sources: list[dict]) -> Element:
     return root
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Generate OPML from sources.yaml")
-    parser.add_argument(
-        "--input",
-        default="sources.yaml",
-        help="Input YAML file (default: sources.yaml)",
-    )
-    parser.add_argument(
-        "--output",
-        default="sources.opml",
-        help="Output OPML file (default: sources.opml)",
-    )
-    args = parser.parse_args()
-
-    input_path = Path(args.input)
-    output_path = Path(args.output)
-
-    if not input_path.exists():
-        print(f"Error: {input_path} not found", file=sys.stderr)
-        sys.exit(1)
-
-    sources = load_sources(input_path)
+def write_opml(sources: list[dict], output_path: Path) -> None:
     root = build_opml(sources)
     indent(root, space="  ")
-
     xml_bytes = b'<?xml version="1.0" encoding="UTF-8"?>\n' + tostring(
         root, encoding="unicode"
     ).encode("utf-8")
-
     output_path.write_bytes(xml_bytes)
 
-    total = len(sources)
-    with_rss = sum(1 for s in sources if s.get("rss"))
-    print(f"Generated {output_path}")
-    print(f"  {total} sources total, {with_rss} with RSS feeds")
-    print(f"  Import {output_path} into Feedly, Reeder, NetNewsWire, or Inoreader")
+
+# ── index.html SOURCES block ──────────────────────────────────────────────────
+
+def _js_str(value: str) -> str:
+    """Return a double-quoted JS string literal with minimal escaping."""
+    return json.dumps(value, ensure_ascii=False)
+
+
+def _js_str_array(items: list[str]) -> str:
+    return "[" + ",".join(_js_str(i) for i in items) + "]"
+
+
+def _source_to_js(s: dict) -> str:
+    lines = []
+    lines.append("  {")
+
+    name     = _js_str(s.get("name", ""))
+    url      = _js_str(s.get("url", ""))
+    rss      = _js_str(s.get("rss", ""))
+    stype    = _js_str(s.get("type", ""))
+    depth    = _js_str(s.get("depth", ""))
+    audience = _js_str_array(s.get("audience", []))
+    tags     = _js_str_array(s.get("tags", []))
+    activity = _js_str(s.get("activity", ""))
+    checked  = _js_str(s.get("last_checked", ""))
+
+    lines.append(f"    name: {name}, url: {url},")
+    lines.append(f"    rss: {rss}, type: {stype}, depth: {depth},")
+    lines.append(f"    audience: {audience}, tags: {tags},")
+    lines.append(f"    activity: {activity}, last_checked: {checked},")
+
+    landmarks = s.get("landmark_posts") or []
+    if landmarks:
+        lm_parts = []
+        for lm in landmarks:
+            t = _js_str(lm.get("title", ""))
+            u = _js_str(lm.get("url", ""))
+            w = _js_str(lm.get("why", ""))
+            lm_parts.append(f"{{title:{t}, url:{u}, why:{w}}}")
+        lines.append(f"    landmarks: [{', '.join(lm_parts)}]")
+    else:
+        lines.append("    landmarks: []")
+
+    lines.append("  }")
+    return "\n".join(lines)
+
+
+def build_sources_block(sources: list[dict]) -> str:
+    sep = INDEX_START + " " + "─" * (79 - len(INDEX_START) - 1)
+    entries = ",\n".join(_source_to_js(s) for s in sources)
+    return f"{sep}\nconst SOURCES = [\n{entries},\n];\n"
+
+
+def update_index_html(sources: list[dict], index_path: Path) -> bool:
+    if not index_path.exists():
+        print(f"  Skipped index.html update ({index_path} not found)", file=sys.stderr)
+        return False
+
+    html = index_path.read_text(encoding="utf-8")
+
+    start_pos = html.find(INDEX_START)
+    end_pos   = html.find(INDEX_END, start_pos)
+
+    if start_pos == -1 or end_pos == -1:
+        print("  Skipped index.html update (sentinel comments not found)", file=sys.stderr)
+        return False
+
+    new_block = build_sources_block(sources)
+    updated = html[:start_pos] + new_block + "\n" + html[end_pos:]
+    index_path.write_text(updated, encoding="utf-8")
+    return True
+
+
+# ── Main ──────────────────────────────────────────────────────────────────────
+
+def main():
+    sources_path = Path("sources.yaml")
+    opml_path    = Path("sources.opml")
+    index_path   = Path("index.html")
+
+    if not sources_path.exists():
+        print(f"Error: {sources_path} not found", file=sys.stderr)
+        sys.exit(1)
+
+    sources = load_sources(sources_path)
+
+    write_opml(sources, opml_path)
+    html_updated = update_index_html(sources, index_path)
+
+    total     = len(sources)
+    with_rss  = sum(1 for s in sources if s.get("rss"))
+    landmarks = sum(len(s.get("landmark_posts") or []) for s in sources)
+
+    print(f"Generated {opml_path}")
+    print(f"  {total} sources, {with_rss} with RSS, {landmarks} landmark posts")
+    if html_updated:
+        print(f"Updated  {index_path}  (SOURCES block rewritten)")
+    print(f"  Import {opml_path} into Feedly, Reeder, NetNewsWire, or Inoreader")
 
 
 if __name__ == "__main__":

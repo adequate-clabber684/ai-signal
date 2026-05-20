@@ -135,7 +135,7 @@ sources:
     depth: deep
     audience: [researcher, ml-engineer, builder]
     tags: [llm-fundamentals, neural-networks, video, education]
-    activity: slow
+    activity: active
     last_checked: 2026-05
     landmark_posts:
       - title: "The Unreasonable Effectiveness of Recurrent Neural Networks"
@@ -211,6 +211,9 @@ sources:
       - title: "Your AI Product Needs Evals"
         url: https://hamel.dev/blog/posts/evals/
         why: "The most direct argument for why evals are non-negotiable — with a practical framework"
+      - title: "LLM Evals: Everything You Need to Know"
+        url: https://hamel.dev/blog/posts/evals-faq/
+        why: "Comprehensive FAQ distilled from teaching 700+ engineers — covers evaluation frameworks, common pitfalls, and the full lifecycle of building LLM evals in production"
 
   - name: "Chip Huyen"
     url: https://huyenchip.com
@@ -395,3 +398,29 @@ sources:
     tags: [weekly-digest, news, broad-coverage]
     activity: active
     last_checked: 2026-05
+
+  # PROPOSED — review before committing
+  - name: "Latent Space"
+    url: https://www.latent.space
+    rss: https://www.latent.space/feed
+    type: paper-explainer
+    depth: medium
+    audience: [ml-engineer, builder]
+    tags: [ai-engineering, papers, agents, tooling, weekly]
+    activity: active
+    last_checked: 2026-05
+
+  # PROPOSED — review before committing
+  - name: "Vicki Boykis"
+    url: https://vickiboykis.com
+    rss: https://vickiboykis.com/index.xml
+    type: individual
+    depth: medium
+    audience: [ml-engineer]
+    tags: [embeddings, recsys, ml-infrastructure, engineering]
+    activity: active
+    last_checked: 2026-05
+    landmark_posts:
+      - title: "What Are Embeddings"
+        url: https://vickiboykis.com/what_are_embeddings/
+        why: "The clearest explanation of what embeddings actually are and how they work — widely cited as the reference introduction for ML engineers"
