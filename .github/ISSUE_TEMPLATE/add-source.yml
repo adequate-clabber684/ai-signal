@@ -1,0 +1,74 @@
+name: Add a source
+description: Suggest a new source for the list
+labels: ["add-source"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Source name
+      placeholder: "e.g. Lilian Weng"
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      placeholder: "https://lilianweng.github.io"
+    validations:
+      required: true
+
+  - type: input
+    id: rss
+    attributes:
+      label: RSS feed URL
+      placeholder: "https://lilianweng.github.io/index.xml"
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options:
+        - lab
+        - individual
+        - systems
+        - paper-explainer
+        - applied
+        - news
+    validations:
+      required: true
+
+  - type: dropdown
+    id: depth
+    attributes:
+      label: Depth
+      options:
+        - deep
+        - medium
+        - shallow
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: audience
+    attributes:
+      label: Audience
+      options:
+        - label: researcher
+        - label: ml-engineer
+        - label: builder
+        - label: curious
+
+  - type: input
+    id: tags
+    attributes:
+      label: Tags (comma separated)
+      placeholder: "inference, rag, production"
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why does this source deserve inclusion?
+      description: What makes it signal vs. noise? What's the best post?
+    validations:
+      required: true

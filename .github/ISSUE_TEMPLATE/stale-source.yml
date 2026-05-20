@@ -1,0 +1,30 @@
+name: Report stale or broken source
+description: Flag a source that has gone quiet or has a broken feed
+labels: ["staleness"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Source name
+      placeholder: "e.g. The Gradient"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue
+    attributes:
+      label: What's wrong?
+      options:
+        - Gone quiet (no posts in 90+ days)
+        - RSS feed broken
+        - Site no longer exists
+        - Quality has significantly dropped
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Any context — last post date, what the feed returns, etc.

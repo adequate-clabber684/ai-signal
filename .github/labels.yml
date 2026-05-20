@@ -1,0 +1,35 @@
+# GitHub Labels for ai-signal
+# Apply with: gh label create --force (see SETUP.md for one-liner)
+
+labels:
+  - name: add-source
+    color: "0075ca"
+    description: "PR or issue proposing a new source"
+
+  - name: staleness
+    color: "e4e669"
+    description: "Source has gone quiet or feed is broken"
+
+  - name: landmark-post
+    color: "d93f0b"
+    description: "Suggestion for a landmark post annotation"
+
+  - name: remove-source
+    color: "b60205"
+    description: "Proposal to archive or remove a source"
+
+  - name: data-quality
+    color: "0e8a16"
+    description: "Fix to metadata, tags, audience, or depth"
+
+  - name: infrastructure
+    color: "5319e7"
+    description: "Changes to workflows, scripts, or site"
+
+  - name: good-first-issue
+    color: "7057ff"
+    description: "Good for newcomers to the project"
+
+  - name: automated
+    color: "cccccc"
+    description: "Opened by the staleness bot"
